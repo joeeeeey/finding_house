@@ -1,0 +1,8 @@
+*.pyc
+.idea/
+data/
+*.html
+*.csv
+log/log.txt
+.env
+.DS_Store

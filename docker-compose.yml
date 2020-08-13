@@ -1,0 +1,18 @@
+version: '3'
+services:
+  # TODO use .env
+  web:
+    env_file:
+      - .env
+    build: ./server
+    ports:
+      - "3003:4000"
+
+  mongo:
+      image: "mongo"
+      command: [--auth]
+      ports:
+        - "27022:27017"
+      volumes:
+        - '/private/var/services/mongodb:/data/db'
+        - "/data"

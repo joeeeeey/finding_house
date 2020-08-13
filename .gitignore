@@ -1,0 +1,16 @@
+npm-debug.log
+**/node_modules/**
+.vscode
+.git2/
+test_scripts/
+.DS_Store
+.env 
+*.pyc
+.idea/
+lianjia-beike-spider/data/
+*.html
+*.csv
+lianjia-beike-spider/log/log.txt
+**/.env**
+.DS_Store
+**/dist/**
