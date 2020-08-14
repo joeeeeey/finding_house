@@ -1,32 +1,82 @@
-// require('module-alias/register')
-// require('something')
-// import { getMongoDB } from './utils/mongo';
 import 'module-alias/register';
 
 import { getMongoDB } from '@utils/mongo';
-console.log('getMongoDB: ', getMongoDB);
+
 import { GraphQLServer } from 'graphql-yoga'
 
-const sampleItems = [
-  { name: 'Apple' },
-  { name: 'Banana' },
-  { name: 'Orange' },
-  { name: 'Melon' },
-]
+
+// const typeDefs = `
+//   type Query {
+//     hello(name: String): String!
+//     helloB(name: String): Asd
+//   }
+
+//   type Asd {
+//     id: String!
+//   }
+// `
+
+// const resolvers = {
+//   Query: {
+//     hello: (_, { name }) => `Hello ${name || 'World'}`,
+//     helloB: (_, { name }) => {
+//       return {
+//         id: name
+//       }
+//     },
+//   },
+// }
+
 
 const typeDefs = `
   type Query {
-    items: [Item!]!
+    getProperties(
+      price: String
+      area: String
+      pageNumber: Int = 1
+      pageSize: Int = 10
+    ): [Property!]!
   }
 
-  type Item {
-    name: String!
+  type Property {
+    date: String!
+    area: String!
+    village: String!
+    description: String!
+    room: String!
+    size: String!
+    price: String!
   }
 `
 
 const resolvers = {
   Query: {
-    items: () => sampleItems,
+    getProperties: async (_, args) => {
+      console.log('args: ', args);
+
+      const { price, pageSize, pageNumber } = args;
+      const offset = (pageNumber - 1) * pageSize;
+
+      let config = null
+
+      if (process.env.NODE_ENV === 'development') {
+        config = {
+          MONGO_DB_HOST: "127.0.0.1",
+          MONGO_DB_PORT: "27022",
+          MONGO_DB_USERNAME: "admin",
+          MONGO_DB_PASSWORD: "123456",
+          MONGO_DB_NAME: "admin",
+        }
+      }
+
+      const mongodb = await getMongoDB(config);
+      const propertyDB = await mongodb.collection("properties");
+      const properties = await propertyDB.find({ price }).skip(offset)
+      .limit(pageSize).toArray()
+
+      return properties;
+    
+    },
   },
 }
 
