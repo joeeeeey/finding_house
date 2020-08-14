@@ -10,9 +10,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "inlineSourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "utils/*": ["src/utils/*"],
+      "@utils/*": ["utils/*"],
     }
   },
   "include": [

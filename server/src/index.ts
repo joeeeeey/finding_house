@@ -1,15 +1,17 @@
 // require('module-alias/register')
 // require('something')
-// import { getMongoDB } from 'utils/mongo';
+// import { getMongoDB } from './utils/mongo';
+import 'module-alias/register';
 
-// const { GraphQLServer } = require('graphql-yoga')
+import { getMongoDB } from '@utils/mongo';
+console.log('getMongoDB: ', getMongoDB);
 import { GraphQLServer } from 'graphql-yoga'
 
 const sampleItems = [
-  {name: 'Apple'},
-  {name: 'Banana'},
-  {name: 'Orange'},
-  {name: 'Melon'},
+  { name: 'Apple' },
+  { name: 'Banana' },
+  { name: 'Orange' },
+  { name: 'Melon' },
 ]
 
 const typeDefs = `

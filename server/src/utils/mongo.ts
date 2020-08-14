@@ -1,9 +1,9 @@
 const MongoClient = require("mongodb").MongoClient;
-const ObjectID = require("mongodb").ObjectID;
+export const ObjectID = require("mongodb").ObjectID;
 
 let mongodb = null;
 
-async function getMongoDB() {
+export async function getMongoDB() {
   if (!mongodb) {
     // const MONGO_DB_NAME = MONGO_DB_NAME || "admin";
     // https://github.com/Automattic/mongoose/issues/8156
@@ -30,4 +30,4 @@ async function getMongoDB() {
   return mongodb;
 }
 
-module.exports = { getMongoDB, ObjectID };
+//  export const asd = { getMongoDB, ObjectID };
