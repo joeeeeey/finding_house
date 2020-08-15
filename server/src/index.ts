@@ -33,6 +33,7 @@ const typeDefs = `
     getProperties(
       price: String
       area: String
+      name: String
       pageNumber: Int = 1
       pageSize: Int = 10
     ): [Property!]!
@@ -49,13 +50,34 @@ const typeDefs = `
   }
 `
 
+const combinePropertyQuery = ({
+  name,
+  area,
+  price,
+}) => {
+  const query = {}
+  if (name) {
+    query['description'] = new RegExp(name);
+  }
+  if (area) {
+    query['area'] = area;
+  }
+  if (price) {
+    query['price'] = price;
+  }
+
+  return query;
+}
+
 const resolvers = {
   Query: {
     getProperties: async (_, args) => {
       console.log('args: ', args);
 
-      const { price, pageSize, pageNumber } = args;
+      const { pageSize, pageNumber } = args;
       const offset = (pageNumber - 1) * pageSize;
+      const query = combinePropertyQuery(args);
+      console.log('query: ', query);
 
       let config = null
 
@@ -71,8 +93,7 @@ const resolvers = {
 
       const mongodb = await getMongoDB(config);
       const propertyDB = await mongodb.collection("properties");
-      const properties = await propertyDB.find({ price }).skip(offset)
-      .limit(pageSize).toArray()
+      const properties = await propertyDB.find(query).skip(offset).limit(pageSize).toArray()
 
       return properties;
     
