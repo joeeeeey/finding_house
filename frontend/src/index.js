@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { ApolloProvider } from 'react-apollo'
-import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset'
-
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
+import { ApolloClient, InMemoryCache, ApolloProvider, } from '@apollo/client';
 
 const client = new ApolloClient({
-  link: httpLink,
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache()
-})
+});
+
+console.log('client: ', client);
 
 ReactDOM.render(
   <ApolloProvider client={client}>

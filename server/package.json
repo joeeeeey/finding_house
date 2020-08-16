@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "csvtojson": "^2.0.10",
+    "graphql-type-json": "^0.3.2",
     "graphql-yoga": "1.2.0",
     "module-alias": "^2.2.2",
     "mongodb": "^3.5.3",

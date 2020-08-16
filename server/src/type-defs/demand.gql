@@ -1,0 +1,34 @@
+
+
+type Query {
+  getProperties(
+    price: String
+    area: String
+    name: String
+    pageNumber: Int = 1
+    pageSize: Int = 10
+  ): [Property!]!
+}
+
+type Mutation {
+  createDemand(input: createDemandInput): Int
+}
+
+type Price {
+  [property: String]: any
+}
+
+type createDemandInput {
+  email: String
+  price: Price
+}
+
+type Property {
+  date: String!
+  area: String!
+  village: String!
+  description: String!
+  room: String!
+  size: String!
+  price: String!
+}

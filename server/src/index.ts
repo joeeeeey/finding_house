@@ -3,32 +3,14 @@ import 'module-alias/register';
 import { getMongoDB } from '@utils/mongo';
 
 import { GraphQLServer } from 'graphql-yoga'
-
-
-// const typeDefs = `
-//   type Query {
-//     hello(name: String): String!
-//     helloB(name: String): Asd
-//   }
-
-//   type Asd {
-//     id: String!
-//   }
-// `
-
-// const resolvers = {
-//   Query: {
-//     hello: (_, { name }) => `Hello ${name || 'World'}`,
-//     helloB: (_, { name }) => {
-//       return {
-//         id: name
-//       }
-//     },
-//   },
-// }
+// import GraphQLJSON from 'graphql-type-json';
+import GraphQLJSON, { GraphQLJSONObject } from 'graphql-type-json';
 
 
 const typeDefs = `
+  scalar JSON
+  scalar JSONObject
+
   type Query {
     getProperties(
       price: String
@@ -37,6 +19,18 @@ const typeDefs = `
       pageNumber: Int = 1
       pageSize: Int = 10
     ): [Property!]!
+  }
+
+  type Mutation {
+    createDemand(input: createDemandInput): Int
+  }
+
+  input createDemandInput {
+    email: String
+    price: JSON
+    rooms: [String]
+    village: [String]
+    areas: [String]
   }
 
   type Property {
@@ -70,6 +64,21 @@ const combinePropertyQuery = ({
 }
 
 const resolvers = {
+  JSON: GraphQLJSON,
+  JSONObject: GraphQLJSONObject,
+  Mutation: {
+    createDemand: async (_, {input}) => {
+      console.log('args: ', input);
+      const {
+        email, price
+      } = input;
+
+      console.log('price: ', price, email);
+      console.log('price: ', price.asd);
+
+      return 12313
+    }
+  },
   Query: {
     getProperties: async (_, args) => {
       console.log('args: ', args);

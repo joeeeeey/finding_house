@@ -1,4 +1,5 @@
-# fullstack
+# Finding house
+Set renting demand and push notification to your email.
 
 This directory contains a simple fullstack example based on `graphql-yoga` and `create-react-app`.
 

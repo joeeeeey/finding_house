@@ -718,6 +718,10 @@ graphql-tools@^2.18.0:
     iterall "^1.1.3"
     uuid "^3.1.0"
 
+graphql-type-json@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.npm.taobao.org/graphql-type-json/download/graphql-type-json-0.3.2.tgz?cache=0&sync_timestamp=1591759855696&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fgraphql-type-json%2Fdownload%2Fgraphql-type-json-0.3.2.tgz#f53a851dbfe07bd1c8157d24150064baab41e115"
+
 graphql-yoga@1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/graphql-yoga/download/graphql-yoga-1.2.0.tgz#3c2aa3a77a20792f208ea63ec92ec1a5360b1d1d"
